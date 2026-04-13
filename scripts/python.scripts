@@ -1,1 +1,54 @@
+import pandas as pd
+
+world=pd.read_csv("C:/Users/LENOVO/Documents/worldometer_data.csv")
+print(world)
+
+clean=pd.read_csv("C:/Users/LENOVO/Documents/covid_19_clean_complete.csv.zip")
+print(clean)
+
+
+print(world.isna().sum())
+
+print(clean.isna().sum())
+
+w1=world['Continent'].mode()[0]
+print(w1)
+world['Continent'].fillna(w1,inplace=True)
+
+
+w2=world['Population'].mean()
+world['Population'].fillna(w2,inplace=True)
+
+
+world['NewCases'].fillna(0,inplace=True)
+world['TotalDeaths'].fillna(0,inplace=True)
+world['NewDeaths'].fillna(0,inplace=True)
+world['TotalRecovered'].fillna(0,inplace=True)
+world['NewRecovered'].fillna(0,inplace=True)
+world['ActiveCases'].fillna(0,inplace=True)
+world['Tot Cases/1M pop'].fillna(0,inplace=True)
+world['Deaths/1M pop'].fillna(0,inplace=True)
+world['TotalTests'].fillna(0,inplace=True)
+world['Tests/1M pop'].fillna(0,inplace=True)
+world['Serious,Critical'].fillna(0,inplace=True)
+w3=world['WHO Region'].mode()[0]
+world['WHO Region'].fillna(w3,inplace=True)
+print(world.isna().sum())
+
+clean['Province/State'].fillna('Unknown',inplace=True)
+print(clean.isna().sum())
+
+# ACTIVE RATE,RECOVERY RATE AND DEATH RATE 
+clean['Active_rate']=(clean['Active']/clean['Confirmed'])*100
+print(clean.columns)
+clean['Death_rate']=(clean['Deaths']/clean['Confirmed'])*100
+clean['reacovery_rate']=(clean['Recovered']/clean['Confirmed'])*100
+
+# NEW CASES
+clean['new_cases']=clean.groupby('Country/Region')['Confirmed'].diff()
+print(clean.columns)
+
+world.to_csv("C:/Users/LENOVO/Documents/world cleaneddata.csv",index=False)
+clean.to_csv("C:/Users/LENOVO/Documents/clean cleaneddata.csv",index=False)
+
 
