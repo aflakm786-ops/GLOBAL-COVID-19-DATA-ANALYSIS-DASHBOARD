@@ -38,10 +38,10 @@ This project analyzes global COVID-19 data using Python, SQL, and Power BI to un
 ![Overview](images/overview.png)
 
 ### Country Analysis
-![Country](images/country_wise_analysis.png)
+![Country](images/countrywiseanalysis.png)
 
 ### Trend Analysis
-![Trend](images/trend_analysis.png)
+![Trend](images/trendanalysis.png)
 
 ---
 
